@@ -1,10 +1,11 @@
 package ToDoBackEndApplication.model;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,8 +18,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "users")
+@Document(collection = "users")  // Anotación de MongoDB
 public class User implements UserDetails {
 
     @Id
@@ -30,10 +30,8 @@ public class User implements UserDetails {
     private String password;
 
     // Hacer que sea opcional (puede ser null o una lista vacía)
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ToDo> todos = new ArrayList<>();  // Inicializar como lista vacía
 
-    @Enumerated(value = EnumType.STRING)
     private Role role;
 
     @Override

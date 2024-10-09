@@ -17,7 +17,7 @@ COPY src ./src
 # Run Maven to build your application
 RUN mvn clean package -DskipTests
 
-# Expose port 8080
+# Expose port 8081
 EXPOSE 8081
 
 # Run the JAR file created by Maven
